@@ -1,0 +1,39 @@
+﻿@model string[,,]
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    if (@Model != null)
+    {
+
+        int length_X = @Model.GetLength(0);
+        int length_Y = @Model.GetLength(1);
+        int length_Z = @Model.GetLength(2);
+
+        <hr />
+
+        for (int x = 0; x < length_X; x++)
+        {
+            <br />
+            <br />
+            <table>
+                @for (int y = 0; y < length_Y; y++)
+                {
+                    <tr>
+                        @for (int z = 0; z < length_Z; z++)
+                        {
+                            <td>@Model[x,y,z]</td>
+                        }
+                    </tr>
+                }
+            </table>
+        }
+
+    }
+    else
+    {
+        <h1>не авторизован</h1>
+    }
+
+}

@@ -1,0 +1,21 @@
+﻿@using WebDiaryVersion1.ViewModels;
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Авторизация";
+}
+
+<div>
+    <form action="/login" method="post">
+        <p>
+            <label>Email</label>
+            <input name="Email" type="text" value="@Model.Email" />
+            <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
+        </p>
+        <p>
+            <label>Пароль</label>
+            <input name="Password" type="password" />
+        </p>
+        <button>Авторизоваться</button>
+    </form>
+</div>
