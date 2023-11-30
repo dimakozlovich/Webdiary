@@ -9,23 +9,32 @@ namespace WebDiaryVersion1.Controllers
     public class CreatingController : Controller
     {
         private readonly IDbSession dbSession;
-
+        private readonly ICurrentUser currentUser;
         private readonly IMainPageBL mainPageBL;
 
 
 
-        public CreatingController(IDbSession dbSession, IMainPageBL mainPageBL)
+        public CreatingController(IDbSession dbSession,ICurrentUser currentUser, IMainPageBL mainPageBL)
         {
             this.dbSession = dbSession;
             this.mainPageBL = mainPageBL;
+            this.currentUser = currentUser;
         }
 
 
         [HttpGet]
         [Route("/creating")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(new ViewModels.CreatingGradeViewModel());
+            if (await currentUser.IsLoggedIn())
+            {
+                return View(new ViewModels.CreatingGradeViewModel());
+            }
+            else
+            {
+                return View(null); 
+            }
+
         }
 
         [HttpPost]
@@ -35,7 +44,13 @@ namespace WebDiaryVersion1.Controllers
             if(ModelState.IsValid)
             {
                 Grade grade = AuthMapper.MapCreatedGradeModelToGrade_DaLLModel(createdGrade);
-                grade.GradeCreator_id = await dbSession.GetUserId() ?? 0;
+                var user_Id = await dbSession.GetUserId();
+
+                if(user_Id != null)
+                {
+                    grade.GradeCreator_id = (int)user_Id;
+                }
+
                 await mainPageBL.CreateGrade(grade);
 
                 return Redirect("/");

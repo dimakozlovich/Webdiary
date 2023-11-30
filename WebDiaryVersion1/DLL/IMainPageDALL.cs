@@ -17,8 +17,10 @@ namespace WebDiaryVersion1.DLL
 
         string[,,] GetCurrentWeek(Grade grade);
 
-
         Task CreateGrade(Grade createdGrade);
+
+        Task<bool> IsExist(Guid guid);
+
 
     }
 

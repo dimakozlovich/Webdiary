@@ -1,15 +1,15 @@
 ﻿@using WebDiaryVersion1.ViewModels;
-@model CreatingGradeViewModel
+@model JoinToGradeViewModel
 
 
 @if(@Model != null)
 {
 <div>
   <form action="/creating" method="post">
-	  <label>Название Класса</label>
-	  <input name="GradeName" type="text"/>
+	  <label>Идентификатор Класса</label>
+	  <input name="guid" type="text"/>
 
-	  <button>Создать класс</button>
+	  <button>Присоедениться</button>
   </form>
 </div>
 }

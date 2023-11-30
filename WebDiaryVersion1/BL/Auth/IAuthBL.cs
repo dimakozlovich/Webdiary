@@ -10,6 +10,9 @@ namespace WebDiaryVersion1.BL.Auth
 		Task<int> Authenticate(string email, string password, bool rememberMe);
 
 		Task<ValidationResult?> ValidateEmail(string email);
-    }
+
+		Task SetGradeToUser(Guid guid, int userId);
+
+	}
 }
 

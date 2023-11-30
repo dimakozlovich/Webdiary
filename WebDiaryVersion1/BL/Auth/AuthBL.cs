@@ -57,6 +57,11 @@ namespace WebDiaryVersion1.BL.Auth
                 return new ValidationResult("Email уже существует");
             return null;
         }
-    }
+		public async Task SetGradeToUser(Guid guid, int userId)
+        {
+            await authDal.SetGradeToUser(guid,userId);
+        }
+
+	}
 }
 

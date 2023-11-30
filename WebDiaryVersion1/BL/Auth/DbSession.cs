@@ -76,6 +76,7 @@ namespace WebDiaryVersion1.BL.Auth
             return data.UserId;
         }
 
+
         public async Task<bool> IsLoggedIn()
         {
             var data = await this.GetSession();

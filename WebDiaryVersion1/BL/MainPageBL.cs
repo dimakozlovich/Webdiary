@@ -25,6 +25,9 @@ namespace WebDiaryVersion1.BL
 		{
 			await mainPageDALL.CreateGrade(grade);
 		}
-
-    }
+		public async Task<bool> IsExist(Guid guid)
+		{
+			return await mainPageDALL.IsExist(guid);
+		}
+	}
 }

@@ -9,6 +9,8 @@ namespace WebDiaryVersion1.BL
 		Task<Grade> GetGrade(int id);
 
 		Task CreateGrade(Grade grade);
+
+		Task<bool> IsExist(Guid guid);
 		
 	}
 }

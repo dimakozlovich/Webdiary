@@ -93,7 +93,7 @@ namespace WebDiaryVersion1.DLL
 
                grade.GradeCreator_id = createdGrade.GradeCreator_id;
 
-               grade.IdentificationNumber = new Guid();
+                grade.IdentificationNumber = Guid.NewGuid();
            
             
             
@@ -110,10 +110,20 @@ namespace WebDiaryVersion1.DLL
             }
 
         }
+		public async Task<bool> IsExist(Guid guid)
+        {
+            using(var connection = new SqlConnection(DbHelper.connectionString)) 
+            {
+               await connection.OpenAsync();
+
+                string sqlRequest = @$"select Grade_id from Grades
+                                       where IdentificatorNumber ='{guid}'";
+                var gradeId = await connection.QueryAsync<int>(sqlRequest);
+
+                return gradeId != null;
+            }
+        }
 
 
-
-
-
-    }
+	}
 }

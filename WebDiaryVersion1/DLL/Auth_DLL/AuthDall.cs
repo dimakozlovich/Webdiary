@@ -41,5 +41,18 @@ namespace WebDiaryVersion1.DLL.Auth_DLL
             }
             throw new NotImplementedException();
         }
-    }
+		async Task IAuthDall.SetGradeToUser(System.Guid guid, int userId)
+		{
+            using(var connection = new SqlConnection(DbHelper.connectionString))
+            {
+                await connection.OpenAsync();
+
+                string sqlQuery = $@"Update AppUser
+                                     set Grade_id = (select Grade_id from Grades where identificationNumber = '{guid}')
+                                     where UserId = {userId}";
+                await connection.ExecuteAsync(sqlQuery);
+            }
+        }
+
+	}
 }

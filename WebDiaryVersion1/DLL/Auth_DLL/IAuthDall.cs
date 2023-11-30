@@ -10,5 +10,6 @@ namespace WebDiaryVersion1.DLL.Auth_DLL
 
         Task<int> CreateUser(UserModel model);
 
+		Task SetGradeToUser(Guid guid, int userId);
     }
 }
