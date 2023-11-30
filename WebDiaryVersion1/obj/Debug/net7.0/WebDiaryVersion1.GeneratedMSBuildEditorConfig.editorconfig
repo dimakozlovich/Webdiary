@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = B:\study\WebDiary\WebDiaryVersion1\WebDiaryVersion1
 build_property._RazorSourceGeneratorDebug = 
 
+[B:/study/WebDiary/WebDiaryVersion1/WebDiaryVersion1/Views/Creating/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlYXRpbmdcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [B:/study/WebDiary/WebDiaryVersion1/WebDiaryVersion1/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

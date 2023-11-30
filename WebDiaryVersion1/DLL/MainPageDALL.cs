@@ -82,5 +82,38 @@ namespace WebDiaryVersion1.DLL
         {
             return grade.GetThisWeek();
         }
+
+        public async Task CreateGrade(Grade createdGrade)
+        {
+            if (createdGrade.GradeName != null)
+            {
+               var grade = new Grade();
+
+               grade.GradeName = createdGrade.GradeName;
+
+               grade.GradeCreator_id = createdGrade.GradeCreator_id;
+
+               grade.IdentificationNumber = new Guid();
+           
+            
+            
+              using(var connection = new SqlConnection(DbHelper.connectionString))
+               {
+                   await connection.OpenAsync();
+
+                    string sqlRequerst = $@"Insert into Grades (GradeName,GradeCreator_id,IdentificationNumber)
+                                           Values(@GradeName, @GradeCreator_id,@IdentificationNumber)";
+
+                   await connection.ExecuteAsync(sqlRequerst,grade);
+               }         
+            
+            }
+
+        }
+
+
+
+
+
     }
 }

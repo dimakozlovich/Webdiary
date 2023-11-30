@@ -13,6 +13,6 @@ namespace WebDiaryVersion1.DLL.Models_DLL
 
 		public string Salt { get; set; } = null!;
 
-		public int Status { get; set; } = 0;
+        public int Grade_id = 0!;
 	}
 }

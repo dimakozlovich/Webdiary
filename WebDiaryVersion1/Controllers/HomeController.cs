@@ -10,32 +10,19 @@ namespace WebDiaryVersion1.Controllers
 	{
 		private readonly ILogger<HomeController> logger;
 		private readonly ICurrentUser currentUser;
-		private readonly IMainPageBL mainPageBL;
 
-		public HomeController(ILogger<HomeController> logger, ICurrentUser currentUser,IMainPageBL mainPageBL)
+
+		public HomeController(ILogger<HomeController> logger, ICurrentUser currentUser)
 		{
 			this.logger = logger;
 			this.currentUser = currentUser;
-			this.mainPageBL = mainPageBL;
 		}
-		public async Task<IActionResult> Index()
-		{
-			bool isLoggedIn = await currentUser.IsLoggedIn();
+        public IActionResult Index()
+        {
+			return View();
+        }
 
-			if(isLoggedIn)
-			{
-				Grade grade = await mainPageBL.GetGrade(1);
-				string[,,] data = mainPageBL.GetCurrentWeek(grade);
-
-				var test = data[1, 1, 1];
-
-				return View(data);
-			}
-			else
-			return View(null);
-		}
-
-		public IActionResult Privacy()
+        public IActionResult Privacy()
 		{
 			return View();
 		}

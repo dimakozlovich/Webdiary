@@ -7,6 +7,8 @@ namespace WebDiaryVersion1.BL
 		string[,,] GetCurrentWeek(Grade grade);
 
 		Task<Grade> GetGrade(int id);
+
+		Task CreateGrade(Grade grade);
 		
 	}
 }

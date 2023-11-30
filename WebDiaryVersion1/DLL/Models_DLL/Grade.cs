@@ -13,6 +13,12 @@ namespace WebDiaryVersion1.DLL.Models_DLL
     {
         public int Grade_id { get; set; }
 
+        public string GradeName { get; set; }
+
+        public int GradeCreator_id { get; set; }
+
+        public Guid IdentificationNumber { get; set; }
+
         private string? Last_week;
 
         private string? This_week;

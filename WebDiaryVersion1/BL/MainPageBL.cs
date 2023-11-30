@@ -20,5 +20,11 @@ namespace WebDiaryVersion1.BL
 		{
 			return await mainPageDALL.GetGrade(id);
 		}
-	}
+
+		public async Task CreateGrade(Grade grade)
+		{
+			await mainPageDALL.CreateGrade(grade);
+		}
+
+    }
 }

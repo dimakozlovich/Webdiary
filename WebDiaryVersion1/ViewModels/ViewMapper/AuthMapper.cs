@@ -12,5 +12,13 @@ namespace WebDiaryVersion1.ViewMapper
 			    Password = model.Password!
 			};
 		}
+		public static Grade MapCreatedGradeModelToGrade_DaLLModel(CreatingGradeViewModel model)
+		{
+			return new Grade()
+			{
+				GradeName = model.GradeName ?? ""
+			};
+
+		}
 	}
 }
