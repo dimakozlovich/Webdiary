@@ -11,7 +11,7 @@ namespace WebDiaryVersion1.BL.Auth
 
 		Task<ValidationResult?> ValidateEmail(string email);
 
-		Task SetGradeToUser(Guid guid, int userId);
+		
 
 	}
 }

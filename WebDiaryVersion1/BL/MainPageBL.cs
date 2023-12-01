@@ -29,5 +29,14 @@ namespace WebDiaryVersion1.BL
 		{
 			return await mainPageDALL.IsExist(guid);
 		}
+		public async Task SetGradeToUser(Guid guid, int userId)
+		{
+			await mainPageDALL.SetGradeToUser(guid, userId);
+		}
+
+		public async Task<Grade?> GetUsersGrade(int user_id)
+		{
+			return await mainPageDALL.GetUsersGrade(user_id);
+		}
 	}
 }

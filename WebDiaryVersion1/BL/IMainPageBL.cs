@@ -11,6 +11,8 @@ namespace WebDiaryVersion1.BL
 		Task CreateGrade(Grade grade);
 
 		Task<bool> IsExist(Guid guid);
-		
+		Task SetGradeToUser(Guid guid, int userId);
+
+		Task<Grade?> GetUsersGrade(int user_id);
 	}
 }

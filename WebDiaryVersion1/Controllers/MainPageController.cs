@@ -10,37 +10,43 @@ namespace WebDiaryVersion1.Controllers
         private readonly ILogger<HomeController> logger;
         private readonly ICurrentUser currentUser;
         private readonly IMainPageBL mainPageBL;
-        private readonly IAuthBL authBL;
         private readonly IDbSession dbSession;
         public MainPageController(ILogger<HomeController> logger,
                                     ICurrentUser currentUser, 
                                     IMainPageBL mainPageBL,
-                                    IAuthBL authBL,
                                     IDbSession dbSession)
         {
             this.logger = logger;
             this.currentUser = currentUser;
             this.mainPageBL = mainPageBL;
-            this.authBL = authBL;
             this.dbSession = dbSession;
         }
-        public async Task<IActionResult> Index()
+		[HttpGet]
+		public async Task<IActionResult> Index()
         {
             bool isLoggedIn = await currentUser.IsLoggedIn();
-
             if (isLoggedIn)
             {
-				var userId = (int)await dbSession.GetUserId();
 
-				Grade grade = await mainPageBL.GetGrade(userId);
-                string[,,] data = mainPageBL.GetCurrentWeek(grade);
-                return View(data);
+                var userId = (int)await dbSession.GetUserId();
+                Grade? grade = await mainPageBL.GetUsersGrade(userId);
+                if (grade != null)
+                    return View(mainPageBL.GetCurrentWeek(grade));
+                else
+                    return View("Join",new ViewModels.JoinToGradeViewModel());
+
             }
             else
-                return View(null);
+            return View(null);
+        }
+        [HttpPost]
+        public void Index(ViewModels.JoinToGradeViewModel model)
+        {
+
         }
         [HttpGet]
-        public async Task<IActionResult> Join()
+		[Route("/join")]
+		public async Task<IActionResult> Join()
         {
             if (!(await currentUser.IsLoggedIn()))
                 return View(null);
@@ -49,14 +55,19 @@ namespace WebDiaryVersion1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Join(ViewModels.JoinToGradeViewModel model)
+		[Route("/join")]
+		public async Task<IActionResult> Join(string strGuid)
         {
-            if(await mainPageBL.IsExist(model.guid))
+
+            Guid guid = new Guid(strGuid);
+            //Guid guid = model.ConvertStringToGuid();
+
+            if(await mainPageBL.IsExist(guid))
             {
               var userId = (int)await dbSession.GetUserId();
-			  await authBL.SetGradeToUser(model.guid,userId);
-			  Grade grade = await mainPageBL.GetGrade(userId);
-			  return View("MainPage/Index", mainPageBL.GetCurrentWeek(grade));
+			  await mainPageBL.SetGradeToUser(guid,userId);
+			  Grade? grade = await mainPageBL.GetUsersGrade(userId) ?? new Grade();
+			  return View("Index", mainPageBL.GetCurrentWeek(grade));
             }
             else
             {

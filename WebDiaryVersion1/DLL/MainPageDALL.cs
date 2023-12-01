@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebDiaryVersion1.DLL.Auth_DLL;
 using WebDiaryVersion1.DLL.Models_DLL;
 
 namespace WebDiaryVersion1.DLL
@@ -117,10 +118,35 @@ namespace WebDiaryVersion1.DLL
                await connection.OpenAsync();
 
                 string sqlRequest = @$"select Grade_id from Grades
-                                       where IdentificatorNumber ='{guid}'";
+                                       where IdentificationNumber ='{guid}'";
                 var gradeId = await connection.QueryAsync<int>(sqlRequest);
 
                 return gradeId != null;
+            }
+        }
+		public async Task SetGradeToUser(System.Guid guid, int userId)
+		{
+			using (var connection = new SqlConnection(DbHelper.connectionString))
+			{
+				await connection.OpenAsync();
+
+				string sqlQuery = $@"Update AppUser
+                                     set Grade_id = (select Grade_id from Grades where identificationNumber = '{guid}')
+                                     where UserId = {userId}";
+				await connection.ExecuteAsync(sqlQuery);
+			}
+		}
+        public async Task<Grade?> GetUsersGrade(int user_id)
+		{
+            using(var connection = new SqlConnection(DbHelper.connectionString))
+            {
+                await connection.OpenAsync();
+
+                string sqlQery = $@"select * from Grades where Grade_id = (select Grade_id from AppUser where UserId = {user_id})";
+
+                Grade? grade = await connection.QueryFirstOrDefaultAsync<Grade>(sqlQery);
+
+                return grade;
             }
         }
 

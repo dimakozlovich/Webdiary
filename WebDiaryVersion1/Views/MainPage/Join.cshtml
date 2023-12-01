@@ -5,10 +5,9 @@
 @if(@Model != null)
 {
 <div>
-  <form action="/creating" method="post">
+  <form action="/join" method="post">
 	  <label>Идентификатор Класса</label>
-	  <input name="guid" type="text"/>
-
+	  <input name="guid" type="text" value="@Model.guid"/>
 	  <button>Присоедениться</button>
   </form>
 </div>
