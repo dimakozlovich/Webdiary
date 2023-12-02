@@ -56,16 +56,16 @@ namespace WebDiaryVersion1.Controllers
 
         [HttpPost]
 		[Route("/join")]
-		public async Task<IActionResult> Join(string strGuid)
+		public async Task<IActionResult> Join(string guid)
         {
 
-            Guid guid = new Guid(strGuid);
+            Guid _Guid = new Guid(guid);
             //Guid guid = model.ConvertStringToGuid();
 
-            if(await mainPageBL.IsExist(guid))
+            if(await mainPageBL.IsExist(_Guid))
             {
               var userId = (int)await dbSession.GetUserId();
-			  await mainPageBL.SetGradeToUser(guid,userId);
+			  await mainPageBL.SetGradeToUser(_Guid,userId);
 			  Grade? grade = await mainPageBL.GetUsersGrade(userId) ?? new Grade();
 			  return View("Index", mainPageBL.GetCurrentWeek(grade));
             }
