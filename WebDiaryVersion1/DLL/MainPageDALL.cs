@@ -63,7 +63,7 @@ namespace WebDiaryVersion1.DLL
             }
         }
 
-        public async Task UpdateThisWeek(string[,,] week, Grade grade)
+        public async Task UpdateThisWeek(string[,,] week, int grade_id)
         {
             using (var connection = new SqlConnection(DbHelper.connectionString))
             {
@@ -72,8 +72,8 @@ namespace WebDiaryVersion1.DLL
                 var toJsonWeek = JsonConvert.SerializeObject(week);
 
                 var sqlQueryUpdateLastWeek = @$"update Grades
-												set This_week = {toJsonWeek}
-												where Grade_id = {grade.Grade_id}";
+												set This_week = '{toJsonWeek}'
+												where Grade_id = {grade_id}";
 
                 await connection.ExecuteAsync(sqlQueryUpdateLastWeek);
             }

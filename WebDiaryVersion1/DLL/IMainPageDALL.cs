@@ -11,7 +11,7 @@ namespace WebDiaryVersion1.DLL
     {
         Task<Grade> GetGrade(int grade_id);
 
-        Task UpdateThisWeek(string[,,] week, Grade grade);
+        Task UpdateThisWeek(string[,,] week, int grade_id);
         Task UpdateLastWeek(string[,,] week, Grade grade);
         Task UpdateNextWeek(string[,,] week, Grade grade);
 

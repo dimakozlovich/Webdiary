@@ -3,6 +3,7 @@ global using WebDiaryVersion1.DLL;
 using WebDiaryVersion1.BL;
 using WebDiaryVersion1.BL.Auth;
 using WebDiaryVersion1.DLL.Auth_DLL;
+using WebDiaryVersion1.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,11 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<IDbSessionDAL, DbSessionDaLL>();
 builder.Services.AddScoped<IDbSession, DbSession>();
 builder.Services.AddMvc();
+
+builder.Services.AddControllersWithViews(opts =>
+{
+    opts.ModelBinderProviders.Insert(0, new CustomPageModelBinderProvider());
+});
 
 
 var app = builder.Build();

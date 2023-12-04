@@ -1,35 +1,55 @@
-﻿@model string[,,]
+﻿@model Grade
 @{
     ViewData["Title"] = "Home Page";
 }
 
 @{
-    if (@Model != null)
+    
+    if (@Model.GetThisWeek() != null)
     {
-
-        int length_X = @Model.GetLength(0);
-        int length_Y = @Model.GetLength(1);
-        int length_Z = @Model.GetLength(2);
+        <p>
+            <lable>Идентификатор класса</lable>
+        <p>@Model.IdentificationNumber.ToString()</p>
+        </p>
+        int? length_X = @Model.GetThisWeek().GetLength(0);
+        int? length_Y = @Model.GetThisWeek().GetLength(1);
+        int? length_Z = @Model.GetThisWeek().GetLength(2);
 
         <hr />
-
-        for (int x = 0; x < length_X; x++)
+        using (Html.BeginForm("Index", "MainPage", FormMethod.Post))
         {
-            <br />
-            <br />
-            <table>
-                @for (int y = 0; y < length_Y; y++)
-                {
-                    <tr>
-                        @for (int z = 0; z < length_Z; z++)
+            for (int x = 0; x < 6; x++)
+            {
+                <br />
+                <br />
+                <table>
+                    @for (int y = 0; y < 7; y++)
+                    {
+                        string subjectvalue;
+                        string hwvalue;
+                        if (x < length_X && y < length_Y)
                         {
-                            <td>@Model[x,y,z]</td>
+                             subjectvalue = @Model.GetThisWeek()[x, y, 0] ?? "";
+                             hwvalue = @Model.GetThisWeek()[x, y, 1] ?? "";
                         }
-                    </tr>
-                }
-            </table>
+                        else
+                        {
+                            subjectvalue = "";
+                            hwvalue = "";
+                        }
+                        <tr>
+                            <td>
+                                <input type="text" value="@subjectvalue" name="value" placeholder="Предмет" />
+                            </td>
+                            <td>
+                                <input type="text" value="@hwvalue" name="value" style="width: 500px;" placeholder="Д.З" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            <input type="submit" value="Сохранить" />
         }
-
     }
     else
     {

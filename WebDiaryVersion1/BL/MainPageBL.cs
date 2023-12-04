@@ -38,5 +38,24 @@ namespace WebDiaryVersion1.BL
 		{
 			return await mainPageDALL.GetUsersGrade(user_id);
 		}
-	}
+		public async Task UpdateThisWeek(List<string> receivedStrings, int grade_id)
+		{
+            var toSaveArray = new string[6, 7, 2];
+            int iter = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    for (int k = 0; k < 2; k++)
+                    {
+                        toSaveArray[i, j, k] = receivedStrings[iter];
+                        iter++;
+                    }
+
+                }
+            }
+			await mainPageDALL.UpdateThisWeek(toSaveArray, grade_id);
+        }
+
+    }
 }

@@ -31,7 +31,7 @@ namespace WebDiaryVersion1.Controllers
                 var userId = (int)await dbSession.GetUserId();
                 Grade? grade = await mainPageBL.GetUsersGrade(userId);
                 if (grade != null)
-                    return View(mainPageBL.GetCurrentWeek(grade));
+                    return View(grade);
                 else
                     return View("Join",new ViewModels.JoinToGradeViewModel());
 
@@ -39,10 +39,15 @@ namespace WebDiaryVersion1.Controllers
             else
             return View(null);
         }
+        
         [HttpPost]
-        public void Index(ViewModels.JoinToGradeViewModel model)
+        public async Task<IActionResult> Index(List<string> value)
         {
-
+            var userId = (int)await dbSession.GetUserId();
+            Grade grade = await mainPageBL.GetUsersGrade(userId);
+            await mainPageBL.UpdateThisWeek(value, grade.Grade_id);
+            Grade updateGrade = await mainPageBL.GetUsersGrade(userId);
+            return View("Index", updateGrade);
         }
         [HttpGet]
 		[Route("/join")]
@@ -61,13 +66,13 @@ namespace WebDiaryVersion1.Controllers
 
             Guid _Guid = new Guid(guid);
             //Guid guid = model.ConvertStringToGuid();
-
+            
             if(await mainPageBL.IsExist(_Guid))
             {
-              var userId = (int)await dbSession.GetUserId();
-			  await mainPageBL.SetGradeToUser(_Guid,userId);
-			  Grade? grade = await mainPageBL.GetUsersGrade(userId) ?? new Grade();
-			  return View("Index", mainPageBL.GetCurrentWeek(grade));
+               var userId = (int)await dbSession.GetUserId();
+			   await mainPageBL.SetGradeToUser(_Guid,userId);
+			   Grade? grade = await mainPageBL.GetUsersGrade(userId) ?? new Grade();
+			   return View("Index", grade);
             }
             else
             {

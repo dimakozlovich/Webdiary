@@ -14,5 +14,8 @@ namespace WebDiaryVersion1.BL
 		Task SetGradeToUser(Guid guid, int userId);
 
 		Task<Grade?> GetUsersGrade(int user_id);
-	}
+
+		Task UpdateThisWeek(List<string> receivedStrings, int grade_id);
+
+    }
 }
