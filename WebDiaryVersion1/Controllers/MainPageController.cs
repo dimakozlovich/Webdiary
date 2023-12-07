@@ -44,9 +44,9 @@ namespace WebDiaryVersion1.Controllers
         public async Task<IActionResult> Index(List<string> value)
         {
             var userId = (int)await dbSession.GetUserId();
-            Grade grade = await mainPageBL.GetUsersGrade(userId);
+            Grade? grade = await mainPageBL.GetUsersGrade(userId);
             await mainPageBL.UpdateThisWeek(value, grade.Grade_id);
-            Grade updateGrade = await mainPageBL.GetUsersGrade(userId);
+            Grade? updateGrade = await mainPageBL.GetUsersGrade(userId);
             return View("Index", updateGrade);
         }
         [HttpGet]
