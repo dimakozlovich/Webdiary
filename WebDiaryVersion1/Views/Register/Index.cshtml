@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Регистрация";
 }
-
+<!--
 <div>
     <form action="/register" method="post">
         <p>
@@ -20,3 +20,28 @@
         <button>Зарегистрироваться</button>
     </form>
 </div>
+-->
+<!Doctype html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/style.css"/>
+</head>
+<body>
+  <div class="registration-form">
+    <h2>Регистрация</h2>
+    <form action="/register" method="post">
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="Email" value="@Model.Email" required>
+        <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
+      </div>
+      <div class="input-group">
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="Password" required>
+        <div class="error">@Html.ValidationMessageFor(m => m.Password)</div>
+      </div>
+      <button type="submit">Авторизоваться</button>
+    </form>
+  </div>
+</body>

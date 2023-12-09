@@ -3,8 +3,8 @@
     ViewData["Title"] = "Home Page";
 }
 
-@{
-    
+@*@{
+
     if (@Model.GetThisWeek() != null)
     {
         <p>
@@ -56,4 +56,110 @@
         <h1>не авторизован</h1>
     }
 
-}
+}*@
+
+<!Doctype html>
+<html>
+    <head>
+         <meta charset="utf-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <link rel="stylesheet"  href="~/css/main-page.css"/>
+    </head>
+    <body>
+    <div class="main-content">
+        <h2>Расписание занятий</h2>
+        <div class="schedule">
+
+
+                  @{
+                    if (@Model.GetThisWeek() != null)
+                    {
+
+                            <lable>Идентификатор класса</lable>
+                        <p>@Model.IdentificationNumber.ToString()</p>
+
+                        int? length_X = @Model.GetThisWeek().GetLength(0);
+                        int? length_Y = @Model.GetThisWeek().GetLength(1);
+                        int? length_Z = @Model.GetThisWeek().GetLength(2);
+
+                        <hr />
+                        using (Html.BeginForm("Index", "MainPage", FormMethod.Post))
+                        {
+                          <div class="left-days">
+                            @for (int x = 0; x < 3; x++)
+                            {
+                                <br />
+                                <br />
+                                <table>
+                                    @for (int y = 0; y < 7; y++)
+                                    {
+                                        string subjectvalue;
+                                        string hwvalue;
+                                        if (x < length_X && y < length_Y)
+                                        {
+                                            subjectvalue = @Model.GetThisWeek()[x, y, 0] ?? "";
+                                            hwvalue = @Model.GetThisWeek()[x, y, 1] ?? "";
+                                        }
+                                        else
+                                        {
+                                            subjectvalue = "";
+                                            hwvalue = "";
+                                        }
+                                        <tr>
+                                            <td>
+                                                <input type="text" value="@subjectvalue" name="value" placeholder="Предмет" />
+                                            </td>
+                                            <td>
+                                                <input type="text" value="@hwvalue" name="value" style="width: 500px;" placeholder="Д.З" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+
+                          </div>
+                          <div class="right-days">
+                                @for (int x = 3; x < 6; x++)
+                                {
+                                    <br />
+                                    <br />
+                                    <table>
+                                        @for (int y = 0; y < 7; y++)
+                                        {
+                                            string subjectvalue;
+                                            string hwvalue;
+                                            if (x < length_X && y < length_Y)
+                                            {
+                                                subjectvalue = @Model.GetThisWeek()[x, y, 0] ?? "";
+                                                hwvalue = @Model.GetThisWeek()[x, y, 1] ?? "";
+                                            }
+                                            else
+                                            {
+                                                subjectvalue = "";
+                                                hwvalue = "";
+                                            }
+                                            <tr>
+                                                <td>
+                                                    <input type="text" value="@subjectvalue" name="value" placeholder="Предмет" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" value="@hwvalue" name="value" style="width: 500px;" placeholder="Д.З" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </table>
+                                }
+                          </div>
+                            <input type="submit" value="Сохранить" />
+                        }
+                    }
+                    else
+                    {
+                        <h1>не авторизован</h1>
+                    }
+
+                }
+            </div>
+     </div>
+    </body>
+</html>

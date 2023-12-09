@@ -5,12 +5,28 @@
       "PackagePath": "staticwebassets\\WebDiaryVersion1.bundle.scp.css"
     },
     {
+      "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\css\\main-page.css",
+      "PackagePath": "staticwebassets\\css\\main-page.css"
+    },
+    {
+      "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\css\\menu-styles.css",
+      "PackagePath": "staticwebassets\\css\\menu-styles.css"
+    },
+    {
       "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
       "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\js\\menu.js",
+      "PackagePath": "staticwebassets\\js\\menu.js"
     },
     {
       "Id": "B:\\study\\WebDiary\\WebDiaryVersion1\\WebDiaryVersion1\\wwwroot\\js\\site.js",

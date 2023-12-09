@@ -5,17 +5,25 @@
     ViewData["Title"] = "Авторизация";
 }
 
-<div>
+<!Doctype html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/style.css"/>
+</head>
+<body>
+  <div class="registration-form">
+    <h2>Авторизация</h2>
     <form action="/login" method="post">
-        <p>
-            <label>Email</label>
-            <input name="Email" type="text" value="@Model.Email" />
-            <div class="error">@Html.ValidationMessageFor(m => m.Email)</div>
-        </p>
-        <p>
-            <label>Пароль</label>
-            <input name="Password" type="password" />
-        </p>
-        <button>Авторизоваться</button>
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="Email" value="@Model.Email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="Password" required>
+      </div>
+      <button type="submit">Авторизоваться</button>
     </form>
-</div>
+  </div>
+</body>

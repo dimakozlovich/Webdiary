@@ -1,0 +1,42 @@
+.main-content {
+    max-width: 1900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .schedule {
+    display: flex;
+  }
+  
+  .left-days {
+    flex: 1;
+    margin: 0 10px;
+    justify-content:left;
+    width: 40%;
+  }
+.right-days {
+    flex: 1;
+    margin: 0 10px;
+    justify-content: right;
+    width: 40%;
+}
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  caption {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
