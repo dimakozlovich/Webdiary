@@ -65,7 +65,6 @@ namespace WebDiaryVersion1.Controllers
         {
 
             Guid _Guid = new Guid(guid);
-            //Guid guid = model.ConvertStringToGuid();
             
             if(await mainPageBL.IsExist(_Guid))
             {
