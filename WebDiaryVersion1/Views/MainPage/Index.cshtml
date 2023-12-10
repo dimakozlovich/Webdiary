@@ -68,23 +68,25 @@
     <body>
     <div class="main-content">
         <h2>Расписание занятий</h2>
-        <div class="schedule">
 
 
-                  @{
-                    if (@Model.GetThisWeek() != null)
+        @using (Html.BeginForm("Index", "MainPage", FormMethod.Post))
+            {
+
+                    @if (@Model.GetThisWeek() != null)
                     {
-
+                
+                        <div class"identifer">
                             <lable>Идентификатор класса</lable>
-                        <p>@Model.IdentificationNumber.ToString()</p>
-
+                            <p>@Model.IdentificationNumber.ToString()</p>
+                        </div>
+                    <div class="schedule">
+                        @{
                         int? length_X = @Model.GetThisWeek().GetLength(0);
                         int? length_Y = @Model.GetThisWeek().GetLength(1);
                         int? length_Z = @Model.GetThisWeek().GetLength(2);
+                        }
 
-                        <hr />
-                        using (Html.BeginForm("Index", "MainPage", FormMethod.Post))
-                        {
                           <div class="left-days">
                             @for (int x = 0; x < 3; x++)
                             {
@@ -115,8 +117,7 @@
                                         </tr>
                                     }
                                 </table>
-                            }
-
+                                }
                           </div>
                           <div class="right-days">
                                 @for (int x = 3; x < 6; x++)
@@ -150,8 +151,9 @@
                                     </table>
                                 }
                           </div>
-                            <input type="submit" value="Сохранить" />
-                        }
+                    </div>
+                       <input type="submit" value="Сохранить" class="input-save"/>
+
                     }
                     else
                     {
@@ -159,7 +161,7 @@
                     }
 
                 }
-            </div>
+            
      </div>
     </body>
 </html>
